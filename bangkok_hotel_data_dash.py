@@ -170,8 +170,8 @@ refined_data.head()
 
 
 # Extract mean values of energy_consumption and usable_area
-energy_consumption_mean = refined_data['energy_consumption'].mean()
-usable_area_mean = refined_data['usable_area'].mean()
+energy_consumption_mean_all = refined_data['energy_consumption'].mean()
+usable_area_mean_all = refined_data['usable_area'].mean()
 
 
 # In[8]:
@@ -186,8 +186,8 @@ reg = LinearRegression().fit(x_r, y_r)
 y_r_pred = reg.predict(x_r)
 
 # Create the rectangular hyperbola curve
-x_hyperbola = np.linspace(1000, 4900, 400)
-y_hyperbola = usable_area_mean * energy_consumption_mean / x_hyperbola
+x_hyperbola = np.linspace(300, 4800, 400)
+y_hyperbola = usable_area_mean_all * energy_consumption_mean_all / x_hyperbola
 
 # Create scatter plot using plotly
 fig3 = go.Scatter(x=refined_data['usable_area'], 
@@ -217,7 +217,7 @@ fig_hyperbola = go.Scatter(x=x_hyperbola,
 
 # Combine the traces and create the layout for the plot
 layout = go.Layout(
-    title='Hotel Energy Consumption vs. Usable Area (By Hotel Class)',
+    title='Hotel Energy Consumption vs. Usable Area',
     xaxis=dict(title='Usable Area'),
     yaxis=dict(title='Energy Consumption'),
     legend_title_text='Legend'
@@ -283,8 +283,8 @@ line_trace = go.Scatter(
 traces.append(line_trace)
 
 # Create the rectangular hyperbola curve
-x_hyperbola = np.linspace(1000, 4900, 400)
-y_hyperbola = usable_area_mean * energy_consumption_mean / x_hyperbola
+x_hyperbola = np.linspace(300, 4800, 400)
+y_hyperbola = usable_area_mean_all * energy_consumption_mean_all / x_hyperbola
 
 fig_hyperbola = go.Scatter(x=x_hyperbola, 
                            y=y_hyperbola, 
@@ -357,8 +357,8 @@ line_trace = go.Scatter(
 traces.append(line_trace)
 
 # Create the rectangular hyperbola curve
-x_hyperbola = np.linspace(1100, 4800, 400)
-y_hyperbola = usable_area_mean * energy_consumption_mean / x_hyperbola
+x_hyperbola = np.linspace(300, 4800, 400)
+y_hyperbola = usable_area_mean_all * energy_consumption_mean_all / x_hyperbola
 
 fig_hyperbola = go.Scatter(x=x_hyperbola, 
                            y=y_hyperbola, 
@@ -797,7 +797,7 @@ hotel_energy_area_data = refined_data[['name', 'energy_consumption', 'usable_are
 hotel_energy_area_data.head()
 
 
-# In[24]:
+# In[18]:
 
 
 # Step 2: Compute area_to_energy_ratio and carbon_emission for each subset
@@ -846,7 +846,7 @@ hotel_energy_area_data = refined_data
 refined_data.head()
 
 
-# In[20]:
+# In[19]:
 
 
 # Calculate baselines for each metric based on hotel class
@@ -857,7 +857,7 @@ baseline_data
 
 # # Create Interactive platform with DASH
 
-# In[25]:
+# In[21]:
 
 
 import dash
@@ -1015,5 +1015,11 @@ def update_output(hotel_name):
 
 # Run the app
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(port=8051)
+
+
+# In[ ]:
+
+
+pip freeze > requirements.txt
 
