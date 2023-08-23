@@ -878,7 +878,7 @@ baseline_data.reset_index(inplace=True)
 
 # Initialize the Dash app with bootstrap components
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.MATERIA])  # Using CYBORG theme for a different aesthetic
-
+server = app.server
 # Define the app layout
 app.layout = dbc.Container([
     # Navbar
