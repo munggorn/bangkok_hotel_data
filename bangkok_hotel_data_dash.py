@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Import relevant libraries and inspect data
-
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -22,10 +14,7 @@ hotel_data = pd.read_csv('bangkok_hotel_data.csv')
 hotel_data.head()
 
 
-# # Extract the relevant columns
-
-# In[2]:
-
+# ---------------------------------------------------
 
 # Extract columns that start with 'amenities/'
 amenities_cols = [col for col in hotel_data.columns if col.startswith('amenities/')]
@@ -43,10 +32,7 @@ relevant_data['ceilhotelClass'] = np.ceil(relevant_data['hotelClass'])
 relevant_data.head()
 
 
-# # Determine the Energy Consumption and the Usable Area
-
-# In[3]:
-
+# ---------------------------------------------------
 
 # Assumptions for energy consumption
 
@@ -79,10 +65,7 @@ relevant_data['usable_area'] = (relevant_data['numberOfRooms'] -
                                                 5*np.random.rand(relevant_data.shape[0]))
 
 
-# # Calculate Energy Consumption Baseline and Usable Area Baseline for each class
-
-# In[4]:
-
+# ---------------------------------------------------
 
 # Calculate baseline energy consumption and usable area
 average_energy_consumption = relevant_data['energy_consumption'].mean()
@@ -96,10 +79,8 @@ grouped_data = relevant_data.groupby('ceilhotelClass').agg({
 grouped_data.head()
 
 
-# # Plot between Energy Consumption and Usable Area
 
-# In[5]:
-
+# ---------------------------------------------------
 
 relevant_data = relevant_data.dropna()
 
@@ -141,11 +122,7 @@ fig = go.Figure(data=[fig1, fig2], layout=layout)
 # Display the plot
 fig.show()
 
-
-# # Remove Outliers
-
-# In[6]:
-
+# ---------------------------------------------------
 
 # Function to remove outliers
 def remove_outliers(df, column_name):
@@ -165,17 +142,13 @@ refined_data['energy_consumption'] = (refined_data['energy_consumption']/10).map
 refined_data['usable_area'] = refined_data['usable_area'].map(int)
 refined_data.head()
 
-
-# In[7]:
-
+# ---------------------------------------------------
 
 # Extract mean values of energy_consumption and usable_area
 energy_consumption_mean_all = refined_data['energy_consumption'].mean()
 usable_area_mean_all = refined_data['usable_area'].mean()
 
-
-# In[8]:
-
+# ---------------------------------------------------
 
 x_r=refined_data['usable_area'].values.reshape(-1,1)
 y_r=refined_data['energy_consumption'].values.reshape(-1,1)
@@ -230,10 +203,7 @@ fig = go.Figure(data=[fig3, fig4, fig_hyperbola], layout=layout)
 fig.show()
 
 
-# # Group by Hotel Size
-
-# In[9]:
-
+# ---------------------------------------------------
 
 from sklearn.cluster import KMeans
 
@@ -312,10 +282,7 @@ fig = go.Figure(data=traces, layout=layout)
 fig.show()
 
 
-# # Group by Hotel Class
-
-# In[10]:
-
+# ---------------------------------------------------
 
 
 
@@ -387,10 +354,7 @@ fig = go.Figure(data=traces,
 fig.show()
 
 
-# # Compare Each Class with its Baseline
-
-# In[11]:
-
+# ---------------------------------------------------
 
 # Fit the linear regression model to get the regression line for the subset
 subset_0 = refined_data[refined_data['ceilhotelClass'] == 0.0]
@@ -459,8 +423,7 @@ fig = go.Figure(
 fig.show()
 
 
-# In[12]:
-
+# ---------------------------------------------------
 
 # Fit the linear regression model to get the regression line for the subset_1
 subset_1 = refined_data[refined_data['ceilhotelClass'] == 1.0]
@@ -524,8 +487,7 @@ fig = go.Figure(data=[scatter_trace,
 fig.show()
 
 
-# In[13]:
-
+# ---------------------------------------------------
 
 subset_2 = refined_data[refined_data['ceilhotelClass'] == 2.0]
 # Fit the linear regression model to get the regression line for the subset_2
@@ -590,8 +552,7 @@ fig = go.Figure(data=[scatter_trace, line_trace,
 fig.show()
 
 
-# In[14]:
-
+# ---------------------------------------------------
 
 subset_3 = refined_data[refined_data['ceilhotelClass'] == 3.0]
 # Fit the linear regression model to get the regression line for the subset_3
@@ -655,8 +616,7 @@ fig = go.Figure(data=[scatter_trace,
 fig.show()
 
 
-# In[15]:
-
+# ---------------------------------------------------
 
 subset_4 = refined_data[refined_data['ceilhotelClass'] == 4.0]
 # Fit the linear regression model to get the regression line for the subset_4
@@ -720,8 +680,7 @@ fig = go.Figure(data=[scatter_trace,
 fig.show()
 
 
-# In[16]:
-
+# ---------------------------------------------------
 
 subset_5 = refined_data[refined_data['ceilhotelClass'] == 5.0]
 # Fit the linear regression model to get the regression line for the subset_5
@@ -785,10 +744,7 @@ fig = go.Figure(data=[scatter_trace,
 fig.show()
 
 
-# # Extract necessary column for visualization on DASH
-
-# In[17]:
-
+# ---------------------------------------------------
 
 # Extract the necessary columns
 hotel_energy_area_data = refined_data[['name', 'energy_consumption', 'usable_area','latitude','longitude']]
@@ -796,9 +752,7 @@ hotel_energy_area_data = refined_data[['name', 'energy_consumption', 'usable_are
 # Display the first few rows of the hotel_energy_area_data
 hotel_energy_area_data.head()
 
-
-# In[18]:
-
+# ---------------------------------------------------
 
 # Step 2: Compute area_to_energy_ratio and carbon_emission for each subset
 subsets = [subset_0, subset_1, subset_2, subset_3, subset_4, subset_5]
@@ -845,9 +799,7 @@ refined_data['efficiency'] = refined_data['area_to_energy_ratio']
 hotel_energy_area_data = refined_data
 refined_data.head()
 
-
-# In[19]:
-
+# ---------------------------------------------------
 
 # Calculate baselines for each metric based on hotel class
 baseline_data = refined_data.groupby('hotelClass').mean()[['energy_consumption', 'usable_area', 'area_to_energy_ratio', 'carbon_emission']]
@@ -855,10 +807,7 @@ baseline_data.reset_index(inplace=True)
 baseline_data
 
 
-# # Create Interactive platform with DASH
-
-# In[20]:
-
+# ---------------------------------------------------
 
 import dash
 import dash_bootstrap_components as dbc
@@ -1015,11 +964,9 @@ def update_output(hotel_name):
 
 # Run the app
 if __name__ == '__main__':
-    app.run_server(port=8051)
+    app.run_server(debug = True)
 
 
-# In[21]:
-
+# ---------------------------------------------------
 
 pip freeze > requirements.txt
-
