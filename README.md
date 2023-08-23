@@ -23,7 +23,7 @@ Interactive Dashboard
 The repository also contains code for an interactive Dash application, allowing users to explore the data in a more hands-on manner. Users can select specific hotels and see how they compare against established benchmarks.
 
 # 3.Interactive Dashboard
-bangkok_hotel_data_dash.py: The repository also contains code for an interactive Dash application, allowing users to explore the data in a more hands-on manner. Users can select specific hotels and see how they compare against established benchmarks.
+App.py: The repository also contains code for an interactive Dash application, allowing users to explore the data in a more hands-on manner. Users can select specific hotels and see how they compare against established benchmarks.
 https://bangkok-hotel-data-app.onrender.com/
 
 # 4. Getting Started
@@ -34,11 +34,15 @@ https://bangkok-hotel-data-app.onrender.com/
 2. Install necessary libraries (preferably in a virtual environment):
    pip install -r requirements.txt
 
-3. Navigate to the repository and launch the Jupyter notebook:
-   jupyter notebook bangkok_hotel_data_analyze.ipynb
+3. Navigate to the repository and launch the Python Module:
+   - python ExtractInput.py
+   - python CalAssumption.py
+   - python Visualization.py
+   - python Criterion.py
+   - python App.py
 
 4. To run the Dash app:
-   python bangkok_hotel_data_dash.py
+   python App.py
 
 # 5. Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Ensure you update tests as appropriate.
