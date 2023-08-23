@@ -1021,5 +1021,4 @@ if __name__ == '__main__':
 # In[ ]:
 
 
-pip freeze > requirements.txt
 
