@@ -1,4 +1,4 @@
-Bangkok Hotel Analysis
+bangkok_hotel_data
 This repository contains an in-depth analysis of hotels in Bangkok, focusing on the relationship between a hotel's usable area and its energy consumption. The analysis is further segmented by hotel class.
 
 # Table of Contents
