@@ -13,7 +13,7 @@ mapbox_token = os.environ.get("MAPBOX_TOKEN")
 
 
 # Explicitly load the refined data
-hotel_energy_area_data = refined_data
+hotel_energy_area_data = pd.read_csv('refined_data.csv')
 
 # Calculate baselines for each metric based on hotel class
 baseline_data = hotel_energy_area_data.groupby('hotelClass').mean()[['energy_consumption', 'usable_area', 'area_to_energy_ratio', 'carbon_emission']]
