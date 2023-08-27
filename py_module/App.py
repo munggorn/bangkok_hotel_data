@@ -7,7 +7,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from Criterion import refined_data
+#from Criterion import refined_data
 import os
 mapbox_token = os.environ.get("MAPBOX_TOKEN")
 
