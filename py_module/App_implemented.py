@@ -43,7 +43,6 @@ app.index_string = '''
 </html>
 '''
 
-# ... [Rest of your code remains unchanged]
 
 # Define the app layout
 app.layout = dbc.Container([
