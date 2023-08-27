@@ -24,6 +24,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.MATERIA])
 server = app.server
 # Define the app layout
 app.layout = dbc.Container([
+    dcc.Location(id='url', refresh=True),
     # Navbar
     dbc.NavbarSimple(
         children=[
@@ -36,21 +37,28 @@ app.layout = dbc.Container([
         className="mb-4"
     ),
 
-    # Search Bar
-    dbc.Row([
-        dbc.Col([
-            dbc.Label("Select a Hotel:", className="mb-2", style={"font-weight": "bold"}),
-            dcc.Dropdown(
-                id='hotel-name-input',
-                options=[{'label': name, 'value': name} for name in hotel_energy_area_data['name'].unique()],
-                value='',
-                searchable=True,
-                clearable=True,
-                placeholder="Search for a hotel...",
-                style={"border-radius": "15px"}
-            )
-        ], width=8, className="offset-2 mb-4")
-    ]),
+# Search Bar
+dbc.Row([
+    dbc.Col([
+        dbc.Label("Select a Hotel:", className="mb-2", style={"font-weight": "bold"}),
+        dbc.Row([
+            dbc.Col([
+                dcc.Dropdown(
+                    id='hotel-name-input',
+                    options=[{'label': name, 'value': name} for name in hotel_energy_area_data['name'].unique()],
+                    value='',
+                    searchable=True,
+                    clearable=True,
+                    placeholder="Search for a hotel...",
+                    style={"border-radius": "15px", "width": "100%"}
+                ),
+            ], width=11),
+            dbc.Col([
+                html.A("Home", id="home-button", className="btn btn-primary ml-1", href="/")
+            ], width=1)
+        ])
+    ], width=10, className="offset-1 mb-4")
+]),
 
     # Hotel Details
     dbc.Row(id='output-container', className="mb-4"),
