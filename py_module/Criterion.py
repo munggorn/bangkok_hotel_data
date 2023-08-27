@@ -63,3 +63,8 @@ refined_data.head()
 # Calculate baselines for each metric based on hotel class
 baseline_data = refined_data.groupby('hotelClass').mean()[['energy_consumption', 'usable_area', 'area_to_energy_ratio', 'carbon_emission']]
 baseline_data.reset_index(inplace=True)
+
+
+# download csv
+file_path = 'C:/Users/User/Documents/GitHub/bangkok_hotel_data/refined_data.csv'
+refined_data.to_csv(file_path, index=False)
