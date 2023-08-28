@@ -53,12 +53,12 @@ dbc.Row([
                     placeholder="Search for a hotel...",
                     style={"border-radius": "15px", "width": "100%"}
                 ),
-            ], width=11),
+            ], width=8),
             dbc.Col([
                 html.A("Home", id="home-button", className="btn btn-primary ml-1", href="/", style={'height': '40px', 'line-height': '15px'})
             ], width=1)
         ])
-    ], width=10, className="offset-2 mb-4")
+    ], width=11, className="offset-2 mb-4")
 ]),
 
     # Hotel Details
