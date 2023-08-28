@@ -14,7 +14,7 @@ mapbox_token = os.environ.get("MAPBOX_TOKEN")
 
 # Explicitly load the refined data
 hotel_energy_area_data = pd.read_csv('refined_data.csv')
-hotel_energy_area_data['hotel_type'] = hotel_energy_area_data['subcategories/0']
+hotel_energy_area_data['hotelRanking'] = hotel_energy_area_data['rankingString']
 
 # Calculate baselines for each metric based on hotel class
 baseline_data = hotel_energy_area_data.groupby('hotelClass').mean()[['energy_consumption', 'usable_area', 'area_to_energy_ratio', 'carbon_emission']]
@@ -138,7 +138,7 @@ def update_output(hotel_name):
         
         fig = px.scatter_mapbox(matching_hotels, lat='latitude', lon='longitude', hover_name='name',
                                 color='color', color_discrete_map={'High Efficiency': 'green', 'Low Efficiency': 'red'},
-                                hover_data=['hotelClass','energy_consumption', 'usable_area', 'efficiency', 'carbon_emission','hotel_type'], 
+                                hover_data=['hotelClass','hotelRanking','energy_consumption', 'usable_area', 'efficiency', 'carbon_emission'], 
                                 zoom=10, center={"lat": hotel['latitude'], "lon": hotel['longitude']})
         fig.update_layout(mapbox_style="carto-positron", mapbox_accesstoken=mapbox_token)
         
