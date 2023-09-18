@@ -24,7 +24,7 @@ The repository also contains code for an interactive Dash application, allowing 
 
 # 3.Interactive Dashboard
 App.py: The repository also contains code for an interactive Dash application, allowing users to explore the data in a more hands-on manner. Users can select specific hotels and see how they compare against established benchmarks.
-https://bangkok-hotel-data-app.onrender.com/
+https://bangkok-hotel-data-app-2.onrender.com/
 
 # 4. Getting Started
 
